@@ -4,22 +4,865 @@
 <head>
     <meta charset="UTF-8">
     <title>Meta Docs | Themes</title>
-    <link rel="icon" type="image/x-icon" href="../images/meta.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Themes - Customize Meta's appearance with beautiful server themes">
     <link rel="stylesheet" href="../css files/docs.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
+    <style>
+        /* ═══ HERO BANNER ═══ */
+        .themes-hero {
+            position: relative;
+            padding: 60px 40px;
+            border-radius: 24px;
+            overflow: hidden;
+            margin-bottom: 48px;
+            text-align: center;
+            background: linear-gradient(135deg, #0a0a2e 0%, #1a0a3e 30%, #0a2a3e 60%, #0a1a2e 100%);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
 
-    <meta property="og:title" content="Themes | Meta Docs">
-    <meta property="og:description"
-        content="Customize Meta's appearance with beautiful server themes. Choose from a variety of stunning themes to give your Meta a personalized look that matches your server's vibe.">
-    <meta property="og:image"
-        content="https://media.discordapp.net/attachments/1011355084514394164/1232259786297577502/lightbub.jpeg?ex=69de06db&is=69dcb55b&hm=9edc8dd25b20cc8aae60ccc2a0062fe29b66cb6225a8fffbf171138e186751bf&=&format=webp&width=206&height=256">
-    <meta property="og:url" content="https://botmeta.app/">
-    <meta property="og:type" content="website">
-    <meta name="theme-color" content="#0085FF">
+        .themes-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(300px circle at 20% 50%, rgba(0, 198, 255, 0.12), transparent),
+                radial-gradient(300px circle at 80% 50%, rgba(139, 92, 246, 0.12), transparent),
+                radial-gradient(200px circle at 50% 80%, rgba(0, 255, 235, 0.08), transparent);
+            pointer-events: none;
+        }
+
+        .themes-hero::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(0, 198, 255, 0.5), rgba(139, 92, 246, 0.5), transparent);
+        }
+
+        .themes-hero h1 {
+            position: relative;
+            font-family: 'Sora', sans-serif;
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 16px;
+            background: linear-gradient(135deg, #fff, #00c6ff, #8b5cf6, #00FFEB);
+            background-size: 300% 300%;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradient-shift 6s ease infinite;
+        }
+
+        .themes-hero p {
+            position: relative;
+            font-size: 17px;
+            color: var(--text-secondary);
+            max-width: 560px;
+            margin: 0 auto;
+            line-height: 1.7;
+        }
+
+        .hero-palette {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 28px;
+        }
+
+        .hero-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            animation: hero-dot-pulse 3s ease-in-out infinite;
+            box-shadow: 0 0 12px currentColor;
+        }
+
+        .hero-dot:nth-child(1) {
+            background: #2727F5;
+            color: #2727F5;
+            animation-delay: 0s;
+        }
+
+        .hero-dot:nth-child(2) {
+            background: #393a40;
+            color: #393a40;
+            animation-delay: 0.3s;
+        }
+
+        .hero-dot:nth-child(3) {
+            background: #00FFEB;
+            color: #00FFEB;
+            animation-delay: 0.6s;
+        }
+
+        .hero-dot:nth-child(4) {
+            background: #4ade80;
+            color: #4ade80;
+            animation-delay: 0.9s;
+        }
+
+        @keyframes hero-dot-pulse {
+
+            0%,
+            100% {
+                transform: scale(1);
+                opacity: 0.8;
+            }
+
+            50% {
+                transform: scale(1.4);
+                opacity: 1;
+            }
+        }
+
+        @keyframes gradient-shift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        /* ═══ THEME CARDS ═══ */
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 32px;
+            margin: 36px 0;
+        }
+
+        .theme-card {
+            background: rgba(10, 15, 30, 0.85);
+            border: 1px solid var(--border-color);
+            border-radius: 22px;
+            overflow: hidden;
+            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .theme-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: 22px;
+            pointer-events: none;
+            background: linear-gradient(135deg, transparent 40%, var(--accent-glow, transparent) 100%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            mix-blend-mode: overlay;
+        }
+
+        .theme-card:hover {
+            transform: translateY(-10px) scale(1.012);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5);
+        }
+
+        .theme-card:hover::after {
+            opacity: 0.4;
+        }
+
+        /* ─── Banner-based theme preview ─── */
+        .theme-banner {
+            position: relative;
+            height: 260px;
+            overflow: hidden;
+            background: #000;
+        }
+
+        .theme-banner .banner-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            transform: scale(1.04);
+            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
+            filter: saturate(1.05);
+        }
+
+        .theme-card:hover .banner-img {
+            transform: scale(1.12);
+            filter: saturate(1.25) brightness(1.05);
+        }
+
+        .theme-banner::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 35%, rgba(10, 12, 28, 0.55) 85%, rgba(10, 12, 28, 0.95) 100%);
+            pointer-events: none;
+        }
+
+        .theme-banner::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
+            transform: translateX(-100%);
+            transition: transform 0.9s ease;
+        }
+
+        .theme-card:hover .theme-banner::after {
+            transform: translateX(100%);
+        }
+
+        .banner-glow-bar {
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            height: 3px;
+            z-index: 5;
+            background: linear-gradient(90deg, transparent, var(--accent-bar, #fff), transparent);
+            opacity: 0.85;
+            box-shadow: 0 0 18px var(--accent-bar, #fff);
+        }
+
+        .banner-tagline {
+            position: absolute;
+            left: 22px;
+            bottom: 16px;
+            z-index: 4;
+            font-family: 'Sora', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: rgba(255, 255, 255, 0.92);
+            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
+            padding: 6px 12px;
+            border-radius: 6px;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(6px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* Per-theme accents */
+        .theme-classical {
+            --accent-bar: #5a5aff;
+            --accent-glow: rgba(39, 39, 245, 0.18);
+        }
+
+        .theme-classical:hover {
+            border-color: rgba(39, 39, 245, 0.55);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 50px rgba(39, 39, 245, 0.18);
+        }
+
+        .theme-discord {
+            --accent-bar: #5865F2;
+            --accent-glow: rgba(88, 101, 242, 0.18);
+        }
+
+        .theme-discord .theme-banner {
+            background: #313338;
+        }
+
+        .theme-discord:hover {
+            border-color: rgba(88, 101, 242, 0.55);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 50px rgba(88, 101, 242, 0.18);
+        }
+
+        .theme-metaplus {
+            --accent-bar: #2dd4bf;
+            --accent-glow: rgba(45, 212, 191, 0.2);
+        }
+
+        .theme-metaplus:hover {
+            border-color: rgba(45, 212, 191, 0.6);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 60px rgba(45, 212, 191, 0.18), 0 0 100px rgba(37, 86, 160, 0.1);
+        }
+
+        .theme-nature {
+            --accent-bar: #4ade80;
+            --accent-glow: rgba(74, 222, 128, 0.2);
+        }
+
+        .theme-nature:hover {
+            border-color: rgba(74, 222, 128, 0.55);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 55px rgba(74, 222, 128, 0.18);
+        }
+
+        .theme-space {
+            --accent-bar: #f59e0b;
+            --accent-glow: rgba(245, 158, 11, 0.2);
+        }
+
+        .theme-space:hover {
+            border-color: rgba(245, 158, 11, 0.55);
+            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6), 0 0 60px rgba(245, 158, 11, 0.15), 0 0 100px rgba(99, 102, 241, 0.1);
+        }
+
+        /* ─── Discord card custom illustration ─── */
+        .discord-illustration {
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background:
+                radial-gradient(ellipse at 30% 30%, rgba(88, 101, 242, 0.25), transparent 55%),
+                radial-gradient(ellipse at 75% 70%, rgba(88, 101, 242, 0.18), transparent 60%),
+                #313338;
+        }
+
+        .discord-illustration::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.04) 0, transparent 2px),
+                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04) 0, transparent 2px),
+                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0, transparent 2px);
+            background-size: 60px 60px, 80px 80px, 40px 40px;
+            opacity: 0.7;
+        }
+
+        .discord-logo-wrap {
+            position: relative;
+            width: 130px;
+            height: 130px;
+            border-radius: 28px;
+            background: linear-gradient(145deg, #5865F2, #4752c4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 20px 50px rgba(88, 101, 242, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+            animation: discord-float 5s ease-in-out infinite;
+        }
+
+        .discord-logo-wrap svg {
+            width: 72px;
+            height: 72px;
+            color: #fff;
+            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
+        }
+
+        @keyframes discord-float {
+
+            0%,
+            100% {
+                transform: translateY(0) rotate(-1deg);
+            }
+
+            50% {
+                transform: translateY(-8px) rotate(1deg);
+            }
+        }
+
+        .discord-chip {
+            position: absolute;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 5px 10px;
+            border-radius: 6px;
+            background: #2b2d31;
+            color: #b5bac1;
+            border: 1px solid #1e1f22;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+        }
+
+        .discord-chip.c1 {
+            top: 22%;
+            left: 14%;
+            animation: discord-float 6s ease-in-out infinite;
+        }
+
+        .discord-chip.c2 {
+            bottom: 24%;
+            right: 12%;
+            animation: discord-float 5.5s ease-in-out infinite 1s;
+        }
+
+        /* Coming Soon Overlay */
+        .coming-soon-overlay {
+            position: absolute;
+            inset: 0;
+            z-index: 10;
+            background: rgba(0, 0, 0, 0.35);
+            backdrop-filter: blur(1.5px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 22px;
+        }
+
+        .coming-soon-label {
+            font-family: 'Sora', sans-serif;
+            font-size: 22px;
+            font-weight: 700;
+            color: #f59e0b;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 0 40px rgba(245, 158, 11, 0.15);
+            padding: 12px 32px;
+            border: 2px solid rgba(245, 158, 11, 0.35);
+            border-radius: 12px;
+            background: rgba(0, 0, 0, 0.5);
+        }
+
+        /* ─── Themes nav link rainbow highlight ─── */
+        .nav-item.active[data-page="themes.html"] {
+            background: linear-gradient(90deg, rgba(39, 39, 245, 0.18), rgba(45, 212, 191, 0.15), rgba(74, 222, 128, 0.15), rgba(245, 158, 11, 0.18)) !important;
+            border-left: none !important;
+            border-image: none !important;
+            color: #fff !important;
+            position: relative;
+            border-radius: 10px !important;
+            padding-left: 16px !important;
+            overflow: hidden;
+        }
+
+        .nav-item.active[data-page="themes.html"]::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 4px;
+            background: linear-gradient(180deg, #2727F5, #2dd4bf, #4ade80, #f59e0b);
+            border-radius: 4px;
+        }
+
+        /* Premium Styling */
+        .theme-card.premium-theme {
+            border-color: rgba(0, 255, 235, 0.2);
+            background: linear-gradient(135deg, rgba(0, 255, 235, 0.03), rgba(10, 15, 30, 0.85));
+        }
+
+        .theme-card.premium-theme:hover {
+            border-color: rgba(0, 255, 235, 0.5);
+        }
+
+        .premium-badge {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            z-index: 3;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 5px 14px;
+            background: linear-gradient(135deg, rgba(0, 255, 235, 0.2), rgba(27, 128, 1, 0.2));
+            border: 1px solid rgba(0, 255, 235, 0.4);
+            border-radius: 20px;
+            color: #00FFEB;
+            font-size: 11px;
+            font-weight: 600;
+            text-shadow: 0 0 8px rgba(0, 255, 235, 0.5);
+            backdrop-filter: blur(10px);
+        }
+
+        .premium-badge svg {
+            width: 12px;
+            height: 12px;
+        }
+
+        /* Theme Info Section */
+        .theme-info {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .theme-info-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .theme-name {
+            font-family: 'Sora', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0;
+        }
+
+        .theme-card.premium-theme .theme-name {
+            color: #00FFEB;
+            text-shadow: 0 0 10px rgba(0, 255, 235, 0.2);
+        }
+
+        .theme-tag {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 3px 10px;
+            border-radius: 6px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .tag-free {
+            background: rgba(0, 198, 255, 0.12);
+            color: #00c6ff;
+            border: 1px solid rgba(0, 198, 255, 0.2);
+        }
+
+        .tag-premium {
+            background: rgba(0, 255, 235, 0.12);
+            color: #00FFEB;
+            border: 1px solid rgba(0, 255, 235, 0.3);
+        }
+
+        .theme-desc {
+            font-size: 14px;
+            color: var(--text-muted);
+            line-height: 1.65;
+            margin: 0;
+        }
+
+        .theme-colors {
+            display: flex;
+            gap: 8px;
+            margin-top: 4px;
+        }
+
+        .theme-color-swatch {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            border: 2px solid rgba(255, 255, 255, 0.08);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            cursor: pointer;
+        }
+
+        .theme-color-swatch:hover {
+            transform: scale(1.25);
+            box-shadow: 0 0 12px currentColor;
+        }
+
+        /* ═══ COMPARISON TABLE ═══ */
+        .comparison-wrapper {
+            margin: 40px 0;
+            border-radius: 20px;
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+            background: rgba(10, 15, 30, 0.7);
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 14px;
+        }
+
+        .comparison-table thead th {
+            padding: 18px 20px;
+            text-align: left;
+            font-family: 'Sora', sans-serif;
+            font-weight: 600;
+            font-size: 13px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            background: rgba(0, 0, 0, 0.3);
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .comparison-table thead th:first-child {
+            padding-left: 28px;
+        }
+
+        .comparison-table tbody td {
+            padding: 16px 20px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            color: var(--text-secondary);
+        }
+
+        .comparison-table tbody td:first-child {
+            padding-left: 28px;
+            font-weight: 500;
+            color: var(--text-primary);
+        }
+
+        .comparison-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .comparison-table tbody tr:hover {
+            background: rgba(0, 198, 255, 0.03);
+        }
+
+        .table-swatch {
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            vertical-align: middle;
+            margin-right: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .table-check {
+            color: #4ade80;
+            font-weight: 700;
+        }
+
+        .table-premium-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            color: #00FFEB;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        /* ═══ SETUP SECTION ═══ */
+        .theme-setup {
+            background: rgba(10, 15, 30, 0.8);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 36px;
+            margin: 40px 0;
+            transition: all 0.3s ease;
+        }
+
+        .theme-setup:hover {
+            border-color: rgba(0, 198, 255, 0.25);
+        }
+
+        .theme-setup-header {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .theme-setup-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(109, 40, 217, 0.2));
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-purple);
+            flex-shrink: 0;
+        }
+
+        .theme-setup-title h3 {
+            font-family: 'Sora', sans-serif;
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: 0 0 4px 0;
+        }
+
+        .theme-setup-title span {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        .theme-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .theme-step {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            padding: 18px 22px;
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(139, 92, 246, 0.1);
+            border-radius: 14px;
+            transition: all 0.3s ease;
+        }
+
+        .theme-step:hover {
+            background: rgba(0, 0, 0, 0.35);
+            border-color: rgba(139, 92, 246, 0.25);
+            transform: translateX(4px);
+        }
+
+        .theme-step-num {
+            width: 34px;
+            height: 34px;
+            background: linear-gradient(135deg, var(--accent-purple), #6d28d9);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 14px;
+            flex-shrink: 0;
+            box-shadow: 0 0 16px rgba(139, 92, 246, 0.3);
+        }
+
+        .theme-step-text {
+            font-size: 14px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+        }
+
+        .theme-step-text code {
+            font-family: 'JetBrains Mono', monospace;
+            background: rgba(139, 92, 246, 0.15);
+            padding: 2px 8px;
+            border-radius: 5px;
+            color: var(--accent-purple);
+            font-size: 13px;
+        }
+
+        /* ═══ PREMIUM CTA ═══ */
+        .premium-cta {
+            position: relative;
+            background: linear-gradient(135deg, rgba(0, 255, 235, 0.05), rgba(10, 15, 30, 0.85));
+            border: 1px solid rgba(0, 255, 235, 0.25);
+            border-radius: 24px;
+            padding: 48px 40px;
+            margin: 48px 0;
+            text-align: center;
+            overflow: hidden;
+        }
+
+        .premium-cta::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(250px circle at 20% 50%, rgba(0, 255, 235, 0.06), transparent),
+                radial-gradient(250px circle at 80% 50%, rgba(27, 128, 1, 0.06), transparent);
+            pointer-events: none;
+        }
+
+        .premium-cta h3 {
+            position: relative;
+            font-family: 'Sora', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #00FFEB, #4ade80);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin: 0 0 12px 0;
+        }
+
+        .premium-cta p {
+            position: relative;
+            color: var(--text-secondary);
+            font-size: 15px;
+            margin: 0 0 28px 0;
+            max-width: 480px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .premium-cta-btn {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 36px;
+            background: linear-gradient(135deg, rgba(0, 255, 235, 0.7), rgba(27, 128, 1, 0.7));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-size: 15px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.35s ease;
+        }
+
+        .premium-cta-btn:hover {
+            background: linear-gradient(135deg, rgba(0, 255, 235, 0.9), rgba(27, 128, 1, 0.9));
+            box-shadow: 0 0 50px rgba(0, 255, 235, 0.35);
+            transform: translateY(-3px);
+        }
+
+        /* ═══ CONTINUE ═══ */
+        .continue-section {
+            text-align: center;
+            padding: 48px 0;
+            margin-top: 40px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        .continue-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 12px;
+            padding: 16px 40px;
+            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
+            border: none;
+            border-radius: 14px;
+            color: white;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.35s ease;
+        }
+
+        .continue-btn:hover {
+            box-shadow: 0 0 40px rgba(0, 198, 255, 0.4);
+            transform: translateY(-3px);
+        }
+
+        .continue-btn svg {
+            transition: transform 0.3s ease;
+        }
+
+        .continue-btn:hover svg {
+            transform: translateX(5px);
+        }
+
+        /* ═══ RESPONSIVE ═══ */
+        @media (max-width: 900px) {
+            .theme-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .themes-hero {
+                padding: 40px 24px;
+            }
+
+            .themes-hero h1 {
+                font-size: 32px;
+            }
+
+            .comparison-table {
+                font-size: 12px;
+            }
+        }
+
+        @media (max-width: 600px) {
+            .theme-banner {
+                height: 200px;
+            }
+
+            .discord-logo-wrap {
+                width: 100px;
+                height: 100px;
+            }
+
+            .discord-logo-wrap svg {
+                width: 56px;
+                height: 56px;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -36,27 +879,27 @@
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="home.html" class="sidebar-logo">
+            <a href="introduction.html" class="sidebar-logo">
                 <img src="images/meta.png" alt="Meta Logo">
                 <span>Meta Docs</span>
             </a>
         </div>
-        https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=7640936837672959&scope=bot%20applications.commands
         <nav class="sidebar-nav">
             <div class="nav-section">
                 <div class="nav-section-title">Getting Started</div>
-                <a href="../home.html" class="nav-item" data-page="home.html"><svg xmlns="http://www.w3.org/2000/svg"
-                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
+                <a href="introduction.html" class="nav-item" data-page="introduction.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         <polyline points="9 22 9 12 15 12 15 22" />
                     </svg> Introduction</a>
-                <a href="/getting.started.html" class="nav-item" data-page="documentation/getting-started.html"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <a href="documentation/getting.started.html" class="nav-item"
+                    data-page="documentation/getting-started.html"><svg xmlns="http://www.w3.org/2000/svg" width="16"
+                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
                     </svg> Getting Started</a>
-                <a href="https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=7640936837672959&scope=bot%20applications.commands"
+                <a href="https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=1392557026813&scope=bot%20applications.commands"
                     class="nav-item" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                         viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
                         stroke-linejoin="round">
@@ -70,13 +913,13 @@
                         <path
                             d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" />
                     </svg> Support</a>
-                <a href="../plus.html" class="nav-item nav-item-special" data-page="plus.html"><svg
+                <a href="plus.html" class="nav-item nav-item-special" data-page="plus.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path
                             d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                     </svg> Meta Plus</a>
-                <a href="../commands.html" class="nav-item" data-page="commands.html"><svg
+                <a href="commands.html" class="nav-item" data-page="commands.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="4 17 10 11 4 5" />
@@ -86,7 +929,7 @@
             <div class="nav-section">
                 <div class="nav-section-title">Protection</div>
                 <a href="anti-mod-grief.html" class="nav-item" data-page="anti-mod-grief.html"><svg
-                        https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=7640936837672959&scope=bot%20applications.commands
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
                         <path d="M12 8v4" />
@@ -145,13 +988,13 @@
             </div>
             <div class="nav-section">
                 <div class="nav-section-title">Security</div>
-                <a href="../article/inspecting.html" class="nav-item" data-page="inspecting.html"><svg
+                <a href="inspecting.html" class="nav-item" data-page="inspecting.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8" />
                         <path d="m21 21-4.3-4.3" />
                     </svg> Inspecting</a>
-                <a href="../article/scanning.html" class="nav-item" data-page="scanning.html"><svg
+                <a href="scanning.html" class="nav-item" data-page="scanning.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 7V5a2 2 0 0 1 2-2h2" />
@@ -160,32 +1003,16 @@
                         <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
                         <path d="M7 12h10" />
                     </svg> Scanning</a>
-                <a href="../article/dangerous-roles.html" class="nav-item" data-page="dangerous-roles.html"><svg
+                <a href="dangerous-roles.html" class="nav-item" data-page="dangerous-roles.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
                         <path d="M12 9v4" />
                         <path d="M12 17h.01" />
                     </svg> Dangerous Roles</a>
-                <a href="../article/meta-role.html" class="nav-item" data-page="meta-role.html"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
-                        <path d="M12 9v4" />
-                        <path d="M12 17h.01" />
-                    </svg> Meta Roles</a>
-                <a href="../article/permissions.html" class="nav-item" data-page="../article/permissions.html"><svg
-                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
-                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                        <circle cx="11" cy="11" r="8" />
-                        <path d="m21 21-4.3-4.3" />
-                    </svg> Permissions</a>
-            </div>
-
-            <div class="nav-section">
                 <div class="nav-section-title">Legal</div>
-                <a href="../legal/terms.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                <a href="terms.html" class="nav-item" data-page="terms.html"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                         <polyline points="14 2 14 8 20 8" />
@@ -193,11 +1020,17 @@
                         <line x1="16" x2="8" y1="17" y2="17" />
                         <polyline points="10 9 9 9 8 9" />
                     </svg> Terms of Service</a>
-                <a href="../legal/privacy.html" class="nav-item"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                <a href="privacy.html" class="nav-item" data-page="privacy.html"><svg xmlns="http://www.w3.org/2000/svg"
+                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
                         stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
                     </svg> Privacy Policy</a>
+                <a href="permissions.html" class="nav-item" data-page="permissions.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                        <path d="m9 12 2 2 4-4" />
+                    </svg> Permissions</a>
             </div>
         </nav>
     </aside>
@@ -227,7 +1060,7 @@
                     <polyline points="15 3 21 3 21 9" />
                     <line x1="10" y1="14" x2="21" y2="3" />
                 </svg></a>
-            <a href="https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=7640936837672959&scope=bot%20applications.commands"
+            <a href="https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=1392557026813&scope=bot%20applications.commands"
                 target="_blank" class="btn-primary">Invite Meta</a>
         </div>
     </header>
@@ -262,29 +1095,12 @@
 
                     <!-- Meta Classical -->
                     <div class="theme-card theme-classical">
-                        <div class="theme-preview">
-                            <div class="preview-orb"
-                                style="width:160px;height:160px;background:#2727F5;top:-40px;right:-40px;"></div>
-                            <div class="preview-orb"
-                                style="width:100px;height:100px;background:#1a1aaa;bottom:-30px;left:-20px;animation-delay:2s;">
-                            </div>
-                            <div class="mock-embed">
-                                <div class="mock-embed-author">
-                                    <div class="mock-embed-author-dot"></div> Meta
-                                </div>
-                                <div class="mock-embed-title">User Inspected</div>
-                                <div class="mock-embed-desc">Showing information for @ExampleUser</div>
-                                <div class="mock-embed-field">
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Account Age</div>
-                                        <div class="mock-embed-field-value">2 years</div>
-                                    </div>
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Risk Level</div>
-                                        <div class="mock-embed-field-value">Low</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="theme-banner">
+                            <img class="banner-img"
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1382423913463550024/META_FALLEN_CITY.png?ex=6a2ba4d9&is=6a2a5359&hm=e0c61b713418316edbe2104243c3c9e5856f9b3ccab83452e8808303af53502d&=&format=webp&quality=lossless&width=2636&height=688"
+                                alt="Meta Classical — Fallen City" loading="lazy">
+                            <span class="banner-tagline">Signature Blue</span>
+                            <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
@@ -304,30 +1120,20 @@
 
                     <!-- Essence of Discord -->
                     <div class="theme-card theme-discord">
-                        <div class="theme-preview">
-                            <div class="preview-orb"
-                                style="width:140px;height:140px;background:#5865F2;top:-35px;left:-30px;opacity:0.2;">
-                            </div>
-                            <div class="preview-orb"
-                                style="width:120px;height:120px;background:#393a40;bottom:-30px;right:-30px;animation-delay:1.5s;opacity:0.25;">
-                            </div>
-                            <div class="mock-embed">
-                                <div class="mock-embed-author">
-                                    <div class="mock-embed-author-dot"></div> Meta
+                        <div class="theme-banner">
+                            <div class="discord-illustration">
+                                <span class="discord-chip c1">#general</span>
+                                <div class="discord-logo-wrap">
+                                    <svg viewBox="0 0 71 55" fill="currentColor" xmlns="http://www.w3.org/2000/svg"
+                                        aria-hidden="true">
+                                        <path
+                                            d="M60.1 4.9A58.5 58.5 0 0 0 45.6.4a.2.2 0 0 0-.2.1c-.6 1.1-1.3 2.6-1.8 3.8a54 54 0 0 0-16.2 0c-.5-1.2-1.2-2.7-1.9-3.8a.2.2 0 0 0-.2-.1A58.4 58.4 0 0 0 10.7 4.9a.2.2 0 0 0-.1.1C1.3 19 .1 32.7.7 46.3c0 .1.1.2.1.2a58.7 58.7 0 0 0 17.7 9 .2.2 0 0 0 .3-.1c1.4-1.9 2.6-3.9 3.6-6 .1-.2 0-.3-.1-.4a38.7 38.7 0 0 1-5.5-2.6c-.2-.1-.2-.4 0-.5l1.1-.9a.2.2 0 0 1 .2 0c11.6 5.3 24 5.3 35.4 0a.2.2 0 0 1 .2 0l1.1.9c.2.1.2.4 0 .5-1.8 1-3.6 2-5.5 2.6-.2.1-.2.3-.1.4 1 2.1 2.2 4.1 3.6 6 .1.1.2.2.3.1a58.5 58.5 0 0 0 17.7-9c.1 0 .1-.1.1-.2.8-15.7-1.4-29.3-9.9-41.3a.2.2 0 0 0-.1-.1ZM23.7 38c-3.4 0-6.3-3.2-6.3-7s2.8-7 6.3-7c3.6 0 6.4 3.2 6.3 7 0 3.8-2.8 7-6.3 7Zm23.4 0c-3.4 0-6.3-3.2-6.3-7s2.8-7 6.3-7c3.6 0 6.4 3.2 6.3 7 0 3.8-2.8 7-6.3 7Z" />
+                                    </svg>
                                 </div>
-                                <div class="mock-embed-title">Message Deleted</div>
-                                <div class="mock-embed-desc">A message was deleted in #general</div>
-                                <div class="mock-embed-field">
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Author</div>
-                                        <div class="mock-embed-field-value">@SomeUser</div>
-                                    </div>
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Channel</div>
-                                        <div class="mock-embed-field-value">#general</div>
-                                    </div>
-                                </div>
+                                <span class="discord-chip c2">@Meta</span>
                             </div>
+                            <span class="banner-tagline">Minimal · Clean</span>
+                            <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
@@ -357,35 +1163,12 @@
                             </svg>
                             Meta Plus
                         </div>
-                        <div class="theme-preview">
-                            <div class="preview-orb"
-                                style="width:170px;height:170px;background:#2dd4bf;top:-50px;left:-40px;"></div>
-                            <div class="preview-orb"
-                                style="width:130px;height:130px;background:#2556a0;bottom:-35px;right:-30px;animation-delay:1s;opacity:0.35;">
-                            </div>
-                            <div class="preview-orb"
-                                style="width:80px;height:80px;background:#4ade80;top:50%;left:60%;animation-delay:3s;opacity:0.2;">
-                            </div>
-                            <div class="preview-orb"
-                                style="width:60px;height:60px;background:#1a8a7a;top:20%;left:15%;animation-delay:4s;opacity:0.2;">
-                            </div>
-                            <div class="mock-embed">
-                                <div class="mock-embed-author">
-                                    <div class="mock-embed-author-dot"></div> Meta
-                                </div>
-                                <div class="mock-embed-title">Role Updated</div>
-                                <div class="mock-embed-desc">A role was modified in the server</div>
-                                <div class="mock-embed-field">
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Role</div>
-                                        <div class="mock-embed-field-value">@Moderator</div>
-                                    </div>
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Changed</div>
-                                        <div class="mock-embed-field-value">Permissions</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="theme-banner">
+                            <img class="banner-img"
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1382425812954775572/META_ARTIC.png?ex=6a2afdde&is=6a29ac5e&hm=a5c9fc58b2d87cab8809637d836dad87ce01f24994df847a8fe9abe1de0ce0e9&=&format=webp&quality=lossless&width=2636&height=686"
+                                alt="Meta Plus — Arctic" loading="lazy">
+                            <span class="banner-tagline">Curated · Cinematic</span>
+                            <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
@@ -417,32 +1200,12 @@
                             </svg>
                             Meta Plus
                         </div>
-                        <div class="theme-preview">
-                            <div class="preview-orb"
-                                style="width:150px;height:150px;background:#4ade80;top:-40px;right:-30px;"></div>
-                            <div class="preview-orb"
-                                style="width:100px;height:100px;background:#22c55e;bottom:-25px;left:-20px;animation-delay:2.5s;">
-                            </div>
-                            <div class="preview-orb"
-                                style="width:70px;height:70px;background:#2dd4bf;top:40%;left:20%;animation-delay:4s;opacity:0.2;">
-                            </div>
-                            <div class="mock-embed">
-                                <div class="mock-embed-author">
-                                    <div class="mock-embed-author-dot"></div> Meta
-                                </div>
-                                <div class="mock-embed-title">Member Joined</div>
-                                <div class="mock-embed-desc">A new member has joined the server</div>
-                                <div class="mock-embed-field">
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">User</div>
-                                        <div class="mock-embed-field-value">@NewMember</div>
-                                    </div>
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Members</div>
-                                        <div class="mock-embed-field-value">#1,247</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="theme-banner">
+                            <img class="banner-img"
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1382428608655524030/META_DINOWORLD.png?ex=6a2b0078&is=6a29aef8&hm=0a70771782dded43f110dd2b755da55975c566a401815aa1309311661033714b&=&format=webp&quality=lossless&width=2636&height=686"
+                                alt="Nature — Dino World" loading="lazy">
+                            <span class="banner-tagline">Wild · Serene</span>
+                            <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
@@ -476,33 +1239,12 @@
                             </svg>
                             Meta Plus
                         </div>
-                        <div class="theme-preview">
-                            <div class="preview-orb"
-                                style="width:120px;height:120px;background:#f59e0b;top:-40px;right:-30px;opacity:0.2;">
-                            </div>
-                            <div class="preview-orb"
-                                style="width:90px;height:90px;background:#6366f1;bottom:-25px;left:-20px;animation-delay:2s;opacity:0.15;">
-                            </div>
-                            <div class="preview-orb"
-                                style="width:60px;height:60px;background:#14b8a6;top:60%;right:20%;animation-delay:3.5s;opacity:0.12;">
-                            </div>
-                            <div class="mock-embed">
-                                <div class="mock-embed-author">
-                                    <div class="mock-embed-author-dot"></div> Meta
-                                </div>
-                                <div class="mock-embed-title">Server Scanned</div>
-                                <div class="mock-embed-desc">Full security scan completed</div>
-                                <div class="mock-embed-field">
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Threats</div>
-                                        <div class="mock-embed-field-value">0 found</div>
-                                    </div>
-                                    <div class="mock-embed-field-item">
-                                        <div class="mock-embed-field-label">Status</div>
-                                        <div class="mock-embed-field-value">Secure ✓</div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="theme-banner">
+                            <img class="banner-img"
+                                src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2636&q=80"
+                                alt="Wonderful Space — Cosmos (placeholder)" loading="lazy">
+                            <span class="banner-tagline">Cosmic · Otherworldly</span>
+                            <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
@@ -524,6 +1266,7 @@
                             </div>
                         </div>
                     </div>
+
 
                 </div>
 
@@ -627,8 +1370,8 @@
                         </div>
                         <div class="theme-step">
                             <div class="theme-step-num">2</div>
-                            <div class="theme-step-text">Navigate to the <strong>Appearance</strong> section in the
-                                settings menu.</div>
+                            <div class="theme-step-text">Navigate to the <strong>Themes</strong> section in the settings
+                                menu.</div>
                         </div>
                         <div class="theme-step">
                             <div class="theme-step-num">3</div>
@@ -643,7 +1386,7 @@
                     <h3>✨ Unlock Premium Themes</h3>
                     <p>Nature Theme and Meta Plus Theme are exclusive to Meta Plus subscribers. Upgrade to unlock all
                         themes and many more premium features.</p>
-                    <a href="../plus.html" class="premium-cta-btn">
+                    <a href="plus.html" class="premium-cta-btn">
                         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path
@@ -665,7 +1408,7 @@
 
                 <!-- ═══ CONTINUE ═══ -->
                 <div class="continue-section">
-                    <a href="../article/inspecting.html" class="continue-btn">
+                    <a href="inspecting.html" class="continue-btn">
                         Continue to Inspecting
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none"
                             stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -681,23 +1424,20 @@
 
     <script>
         const searchData = [
-            { title: "Introduction", desc: "Welcome to Meta documentation", url: "home.html", category: "Getting Started" },
+            { title: "Introduction", desc: "Welcome to Meta documentation", url: "introduction.html", category: "Getting Started" },
             { title: "Getting Started", desc: "Learn the basics of Meta bot", url: "getting-started.html", category: "Getting Started" },
             { title: "Meta Plus", desc: "Premium features and benefits", url: "plus.html", category: "Getting Started" },
             { title: "Commands", desc: "Full list of available commands", url: "commands.html", category: "Getting Started" },
             { title: "Anti Mod Grief", desc: "Protect against malicious moderators", url: "anti-mod-grief.html", category: "Protection" },
             { title: "Anti Alt", desc: "Detect and block alternate accounts", url: "anti-alt.html", category: "Protection" },
-            { title: "Malicious App", desc: "Protect from dangerous bots", url: "malicious-app.html", category: "Protection" },
+            { title: "Malicious Bot", desc: "Protect from dangerous bots", url: "malicious-app.html", category: "Protection" },
             { title: "AutoMod", desc: "Automatic moderation features", url: "automod.html", category: "Protection" },
             { title: "Server Logs", desc: "Track server activity", url: "server-logs.html", category: "Protection" },
             { title: "Themes", desc: "Customize Meta's appearance", url: "themes.html", category: "Protection" },
             { title: "Inspecting", desc: "Inspect users and content", url: "inspecting.html", category: "Security" },
             { title: "Scanning", desc: "Scan for threats", url: "scanning.html", category: "Security" },
             { title: "Dangerous Roles", desc: "Identify risky role permissions", url: "dangerous-roles.html", category: "Security" },
-            { title: "Terms of Service", desc: "Review the terms of service", url: "../legal/terms.html", category: "Legal" },
-            { title: "Privacy Policy", desc: "Learn how we protect your data", url: "../legal/privacy.html", category: "Legal" }
         ];
-
 
         const searchInput = document.getElementById('search-input');
         const searchResults = document.getElementById('search-results');
