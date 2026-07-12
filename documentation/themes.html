@@ -10,859 +10,6 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Sora:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
         rel="stylesheet">
-    <style>
-        /* ═══ HERO BANNER ═══ */
-        .themes-hero {
-            position: relative;
-            padding: 60px 40px;
-            border-radius: 24px;
-            overflow: hidden;
-            margin-bottom: 48px;
-            text-align: center;
-            background: linear-gradient(135deg, #0a0a2e 0%, #1a0a3e 30%, #0a2a3e 60%, #0a1a2e 100%);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-
-        .themes-hero::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(300px circle at 20% 50%, rgba(0, 198, 255, 0.12), transparent),
-                radial-gradient(300px circle at 80% 50%, rgba(139, 92, 246, 0.12), transparent),
-                radial-gradient(200px circle at 50% 80%, rgba(0, 255, 235, 0.08), transparent);
-            pointer-events: none;
-        }
-
-        .themes-hero::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, rgba(0, 198, 255, 0.5), rgba(139, 92, 246, 0.5), transparent);
-        }
-
-        .themes-hero h1 {
-            position: relative;
-            font-family: 'Sora', sans-serif;
-            font-size: 48px;
-            font-weight: 700;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #fff, #00c6ff, #8b5cf6, #00FFEB);
-            background-size: 300% 300%;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            animation: gradient-shift 6s ease infinite;
-        }
-
-        .themes-hero p {
-            position: relative;
-            font-size: 17px;
-            color: var(--text-secondary);
-            max-width: 560px;
-            margin: 0 auto;
-            line-height: 1.7;
-        }
-
-        .hero-palette {
-            position: relative;
-            display: flex;
-            justify-content: center;
-            gap: 12px;
-            margin-top: 28px;
-        }
-
-        .hero-dot {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            animation: hero-dot-pulse 3s ease-in-out infinite;
-            box-shadow: 0 0 12px currentColor;
-        }
-
-        .hero-dot:nth-child(1) {
-            background: #2727F5;
-            color: #2727F5;
-            animation-delay: 0s;
-        }
-
-        .hero-dot:nth-child(2) {
-            background: #393a40;
-            color: #393a40;
-            animation-delay: 0.3s;
-        }
-
-        .hero-dot:nth-child(3) {
-            background: #00FFEB;
-            color: #00FFEB;
-            animation-delay: 0.6s;
-        }
-
-        .hero-dot:nth-child(4) {
-            background: #4ade80;
-            color: #4ade80;
-            animation-delay: 0.9s;
-        }
-
-        @keyframes hero-dot-pulse {
-
-            0%,
-            100% {
-                transform: scale(1);
-                opacity: 0.8;
-            }
-
-            50% {
-                transform: scale(1.4);
-                opacity: 1;
-            }
-        }
-
-        @keyframes gradient-shift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
-        }
-
-        /* ═══ THEME CARDS ═══ */
-        .theme-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 32px;
-            margin: 36px 0;
-        }
-
-        .theme-card {
-            background: rgba(10, 15, 30, 0.85);
-            border: 1px solid var(--border-color);
-            border-radius: 22px;
-            overflow: hidden;
-            transition: all 0.45s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .theme-card::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: 22px;
-            pointer-events: none;
-            background: linear-gradient(135deg, transparent 40%, var(--accent-glow, transparent) 100%);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-            mix-blend-mode: overlay;
-        }
-
-        .theme-card:hover {
-            transform: translateY(-10px) scale(1.012);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5);
-        }
-
-        .theme-card:hover::after {
-            opacity: 0.4;
-        }
-
-        /* ─── Banner-based theme preview ─── */
-        .theme-banner {
-            position: relative;
-            height: 260px;
-            overflow: hidden;
-            background: #000;
-        }
-
-        .theme-banner .banner-img {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
-            transform: scale(1.04);
-            transition: transform 1.2s cubic-bezier(0.2, 0.8, 0.2, 1), filter 0.6s ease;
-            filter: saturate(1.05);
-        }
-
-        .theme-card:hover .banner-img {
-            transform: scale(1.12);
-            filter: saturate(1.25) brightness(1.05);
-        }
-
-        .theme-banner::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 2;
-            background: linear-gradient(180deg, rgba(0, 0, 0, 0.05) 0%, rgba(0, 0, 0, 0) 35%, rgba(10, 12, 28, 0.55) 85%, rgba(10, 12, 28, 0.95) 100%);
-            pointer-events: none;
-        }
-
-        .theme-banner::after {
-            content: '';
-            position: absolute;
-            inset: 0;
-            z-index: 3;
-            pointer-events: none;
-            background: linear-gradient(115deg, transparent 30%, rgba(255, 255, 255, 0.08) 50%, transparent 70%);
-            transform: translateX(-100%);
-            transition: transform 0.9s ease;
-        }
-
-        .theme-card:hover .theme-banner::after {
-            transform: translateX(100%);
-        }
-
-        .banner-glow-bar {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            height: 3px;
-            z-index: 5;
-            background: linear-gradient(90deg, transparent, var(--accent-bar, #fff), transparent);
-            opacity: 0.85;
-            box-shadow: 0 0 18px var(--accent-bar, #fff);
-        }
-
-        .banner-tagline {
-            position: absolute;
-            left: 22px;
-            bottom: 16px;
-            z-index: 4;
-            font-family: 'Sora', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            letter-spacing: 2.5px;
-            text-transform: uppercase;
-            color: rgba(255, 255, 255, 0.92);
-            text-shadow: 0 2px 12px rgba(0, 0, 0, 0.7);
-            padding: 6px 12px;
-            border-radius: 6px;
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        /* Per-theme accents */
-        .theme-classical {
-            --accent-bar: #5a5aff;
-            --accent-glow: rgba(39, 39, 245, 0.18);
-        }
-
-        .theme-classical:hover {
-            border-color: rgba(39, 39, 245, 0.55);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 50px rgba(39, 39, 245, 0.18);
-        }
-
-        .theme-discord {
-            --accent-bar: #5865F2;
-            --accent-glow: rgba(88, 101, 242, 0.18);
-        }
-
-        .theme-discord .theme-banner {
-            background: #313338;
-        }
-
-        .theme-discord:hover {
-            border-color: rgba(88, 101, 242, 0.55);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 50px rgba(88, 101, 242, 0.18);
-        }
-
-        .theme-metaplus {
-            --accent-bar: #2dd4bf;
-            --accent-glow: rgba(45, 212, 191, 0.2);
-        }
-
-        .theme-metaplus:hover {
-            border-color: rgba(45, 212, 191, 0.6);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 60px rgba(45, 212, 191, 0.18), 0 0 100px rgba(37, 86, 160, 0.1);
-        }
-
-        .theme-nature {
-            --accent-bar: #4ade80;
-            --accent-glow: rgba(74, 222, 128, 0.2);
-        }
-
-        .theme-nature:hover {
-            border-color: rgba(74, 222, 128, 0.55);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.5), 0 0 55px rgba(74, 222, 128, 0.18);
-        }
-
-        .theme-space {
-            --accent-bar: #f59e0b;
-            --accent-glow: rgba(245, 158, 11, 0.2);
-        }
-
-        .theme-space:hover {
-            border-color: rgba(245, 158, 11, 0.55);
-            box-shadow: 0 35px 70px rgba(0, 0, 0, 0.6), 0 0 60px rgba(245, 158, 11, 0.15), 0 0 100px rgba(99, 102, 241, 0.1);
-        }
-
-        /* ─── Discord card custom illustration ─── */
-        .discord-illustration {
-            position: absolute;
-            inset: 0;
-            z-index: 1;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            background:
-                radial-gradient(ellipse at 30% 30%, rgba(88, 101, 242, 0.25), transparent 55%),
-                radial-gradient(ellipse at 75% 70%, rgba(88, 101, 242, 0.18), transparent 60%),
-                #313338;
-        }
-
-        .discord-illustration::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 80%, rgba(255, 255, 255, 0.04) 0, transparent 2px),
-                radial-gradient(circle at 80% 20%, rgba(255, 255, 255, 0.04) 0, transparent 2px),
-                radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.03) 0, transparent 2px);
-            background-size: 60px 60px, 80px 80px, 40px 40px;
-            opacity: 0.7;
-        }
-
-        .discord-logo-wrap {
-            position: relative;
-            width: 130px;
-            height: 130px;
-            border-radius: 28px;
-            background: linear-gradient(145deg, #5865F2, #4752c4);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 20px 50px rgba(88, 101, 242, 0.45), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
-            animation: discord-float 5s ease-in-out infinite;
-        }
-
-        .discord-logo-wrap svg {
-            width: 72px;
-            height: 72px;
-            color: #fff;
-            filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.3));
-        }
-
-        @keyframes discord-float {
-
-            0%,
-            100% {
-                transform: translateY(0) rotate(-1deg);
-            }
-
-            50% {
-                transform: translateY(-8px) rotate(1deg);
-            }
-        }
-
-        .discord-chip {
-            position: absolute;
-            font-family: 'JetBrains Mono', monospace;
-            font-size: 10px;
-            padding: 5px 10px;
-            border-radius: 6px;
-            background: #2b2d31;
-            color: #b5bac1;
-            border: 1px solid #1e1f22;
-            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-        }
-
-        .discord-chip.c1 {
-            top: 22%;
-            left: 14%;
-            animation: discord-float 6s ease-in-out infinite;
-        }
-
-        .discord-chip.c2 {
-            bottom: 24%;
-            right: 12%;
-            animation: discord-float 5.5s ease-in-out infinite 1s;
-        }
-
-        /* Coming Soon Overlay */
-        .coming-soon-overlay {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
-            background: rgba(0, 0, 0, 0.35);
-            backdrop-filter: blur(1.5px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 22px;
-        }
-
-        .coming-soon-label {
-            font-family: 'Sora', sans-serif;
-            font-size: 22px;
-            font-weight: 700;
-            color: #f59e0b;
-            text-transform: uppercase;
-            letter-spacing: 4px;
-            text-shadow: 0 0 20px rgba(245, 158, 11, 0.4), 0 0 40px rgba(245, 158, 11, 0.15);
-            padding: 12px 32px;
-            border: 2px solid rgba(245, 158, 11, 0.35);
-            border-radius: 12px;
-            background: rgba(0, 0, 0, 0.5);
-        }
-
-        /* ─── Themes nav link rainbow highlight ─── */
-        .nav-item.active[data-page="themes.html"] {
-            background: linear-gradient(90deg, rgba(39, 39, 245, 0.18), rgba(45, 212, 191, 0.15), rgba(74, 222, 128, 0.15), rgba(245, 158, 11, 0.18)) !important;
-            border-left: none !important;
-            border-image: none !important;
-            color: #fff !important;
-            position: relative;
-            border-radius: 10px !important;
-            padding-left: 16px !important;
-            overflow: hidden;
-        }
-
-        .nav-item.active[data-page="themes.html"]::before {
-            content: '';
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 4px;
-            background: linear-gradient(180deg, #2727F5, #2dd4bf, #4ade80, #f59e0b);
-            border-radius: 4px;
-        }
-
-        /* Premium Styling */
-        .theme-card.premium-theme {
-            border-color: rgba(0, 255, 235, 0.2);
-            background: linear-gradient(135deg, rgba(0, 255, 235, 0.03), rgba(10, 15, 30, 0.85));
-        }
-
-        .theme-card.premium-theme:hover {
-            border-color: rgba(0, 255, 235, 0.5);
-        }
-
-        .premium-badge {
-            position: absolute;
-            top: 16px;
-            right: 16px;
-            z-index: 3;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 5px 14px;
-            background: linear-gradient(135deg, rgba(0, 255, 235, 0.2), rgba(27, 128, 1, 0.2));
-            border: 1px solid rgba(0, 255, 235, 0.4);
-            border-radius: 20px;
-            color: #00FFEB;
-            font-size: 11px;
-            font-weight: 600;
-            text-shadow: 0 0 8px rgba(0, 255, 235, 0.5);
-            backdrop-filter: blur(10px);
-        }
-
-        .premium-badge svg {
-            width: 12px;
-            height: 12px;
-        }
-
-        /* Theme Info Section */
-        .theme-info {
-            padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .theme-info-header {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .theme-name {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0;
-        }
-
-        .theme-card.premium-theme .theme-name {
-            color: #00FFEB;
-            text-shadow: 0 0 10px rgba(0, 255, 235, 0.2);
-        }
-
-        .theme-tag {
-            font-size: 11px;
-            font-weight: 600;
-            padding: 3px 10px;
-            border-radius: 6px;
-            letter-spacing: 0.5px;
-            text-transform: uppercase;
-        }
-
-        .tag-free {
-            background: rgba(0, 198, 255, 0.12);
-            color: #00c6ff;
-            border: 1px solid rgba(0, 198, 255, 0.2);
-        }
-
-        .tag-premium {
-            background: rgba(0, 255, 235, 0.12);
-            color: #00FFEB;
-            border: 1px solid rgba(0, 255, 235, 0.3);
-        }
-
-        .theme-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.65;
-            margin: 0;
-        }
-
-        .theme-colors {
-            display: flex;
-            gap: 8px;
-            margin-top: 4px;
-        }
-
-        .theme-color-swatch {
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            border: 2px solid rgba(255, 255, 255, 0.08);
-            transition: transform 0.25s ease, box-shadow 0.25s ease;
-            cursor: pointer;
-        }
-
-        .theme-color-swatch:hover {
-            transform: scale(1.25);
-            box-shadow: 0 0 12px currentColor;
-        }
-
-        /* ═══ COMPARISON TABLE ═══ */
-        .comparison-wrapper {
-            margin: 40px 0;
-            border-radius: 20px;
-            overflow: hidden;
-            border: 1px solid var(--border-color);
-            background: rgba(10, 15, 30, 0.7);
-        }
-
-        .comparison-table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 14px;
-        }
-
-        .comparison-table thead th {
-            padding: 18px 20px;
-            text-align: left;
-            font-family: 'Sora', sans-serif;
-            font-weight: 600;
-            font-size: 13px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.8px;
-            background: rgba(0, 0, 0, 0.3);
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .comparison-table thead th:first-child {
-            padding-left: 28px;
-        }
-
-        .comparison-table tbody td {
-            padding: 16px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            color: var(--text-secondary);
-        }
-
-        .comparison-table tbody td:first-child {
-            padding-left: 28px;
-            font-weight: 500;
-            color: var(--text-primary);
-        }
-
-        .comparison-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .comparison-table tbody tr:hover {
-            background: rgba(0, 198, 255, 0.03);
-        }
-
-        .table-swatch {
-            display: inline-block;
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            vertical-align: middle;
-            margin-right: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .table-check {
-            color: #4ade80;
-            font-weight: 700;
-        }
-
-        .table-premium-label {
-            display: inline-flex;
-            align-items: center;
-            gap: 4px;
-            color: #00FFEB;
-            font-size: 11px;
-            font-weight: 600;
-        }
-
-        /* ═══ SETUP SECTION ═══ */
-        .theme-setup {
-            background: rgba(10, 15, 30, 0.8);
-            border: 1px solid var(--border-color);
-            border-radius: 20px;
-            padding: 36px;
-            margin: 40px 0;
-            transition: all 0.3s ease;
-        }
-
-        .theme-setup:hover {
-            border-color: rgba(0, 198, 255, 0.25);
-        }
-
-        .theme-setup-header {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            margin-bottom: 24px;
-        }
-
-        .theme-setup-icon {
-            width: 56px;
-            height: 56px;
-            background: linear-gradient(135deg, rgba(139, 92, 246, 0.2), rgba(109, 40, 217, 0.2));
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--accent-purple);
-            flex-shrink: 0;
-        }
-
-        .theme-setup-title h3 {
-            font-family: 'Sora', sans-serif;
-            font-size: 20px;
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: 0 0 4px 0;
-        }
-
-        .theme-setup-title span {
-            font-size: 13px;
-            color: var(--text-muted);
-        }
-
-        .theme-steps {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .theme-step {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            padding: 18px 22px;
-            background: rgba(0, 0, 0, 0.25);
-            border: 1px solid rgba(139, 92, 246, 0.1);
-            border-radius: 14px;
-            transition: all 0.3s ease;
-        }
-
-        .theme-step:hover {
-            background: rgba(0, 0, 0, 0.35);
-            border-color: rgba(139, 92, 246, 0.25);
-            transform: translateX(4px);
-        }
-
-        .theme-step-num {
-            width: 34px;
-            height: 34px;
-            background: linear-gradient(135deg, var(--accent-purple), #6d28d9);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 14px;
-            flex-shrink: 0;
-            box-shadow: 0 0 16px rgba(139, 92, 246, 0.3);
-        }
-
-        .theme-step-text {
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.5;
-        }
-
-        .theme-step-text code {
-            font-family: 'JetBrains Mono', monospace;
-            background: rgba(139, 92, 246, 0.15);
-            padding: 2px 8px;
-            border-radius: 5px;
-            color: var(--accent-purple);
-            font-size: 13px;
-        }
-
-        /* ═══ PREMIUM CTA ═══ */
-        .premium-cta {
-            position: relative;
-            background: linear-gradient(135deg, rgba(0, 255, 235, 0.05), rgba(10, 15, 30, 0.85));
-            border: 1px solid rgba(0, 255, 235, 0.25);
-            border-radius: 24px;
-            padding: 48px 40px;
-            margin: 48px 0;
-            text-align: center;
-            overflow: hidden;
-        }
-
-        .premium-cta::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(250px circle at 20% 50%, rgba(0, 255, 235, 0.06), transparent),
-                radial-gradient(250px circle at 80% 50%, rgba(27, 128, 1, 0.06), transparent);
-            pointer-events: none;
-        }
-
-        .premium-cta h3 {
-            position: relative;
-            font-family: 'Sora', sans-serif;
-            font-size: 24px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #00FFEB, #4ade80);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin: 0 0 12px 0;
-        }
-
-        .premium-cta p {
-            position: relative;
-            color: var(--text-secondary);
-            font-size: 15px;
-            margin: 0 0 28px 0;
-            max-width: 480px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .premium-cta-btn {
-            position: relative;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
-            padding: 14px 36px;
-            background: linear-gradient(135deg, rgba(0, 255, 235, 0.7), rgba(27, 128, 1, 0.7));
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 15px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.35s ease;
-        }
-
-        .premium-cta-btn:hover {
-            background: linear-gradient(135deg, rgba(0, 255, 235, 0.9), rgba(27, 128, 1, 0.9));
-            box-shadow: 0 0 50px rgba(0, 255, 235, 0.35);
-            transform: translateY(-3px);
-        }
-
-        /* ═══ CONTINUE ═══ */
-        .continue-section {
-            text-align: center;
-            padding: 48px 0;
-            margin-top: 40px;
-            border-top: 1px solid var(--border-color);
-        }
-
-        .continue-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 16px 40px;
-            background: linear-gradient(135deg, var(--accent-blue), var(--accent-cyan));
-            border: none;
-            border-radius: 14px;
-            color: white;
-            font-size: 16px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.35s ease;
-        }
-
-        .continue-btn:hover {
-            box-shadow: 0 0 40px rgba(0, 198, 255, 0.4);
-            transform: translateY(-3px);
-        }
-
-        .continue-btn svg {
-            transition: transform 0.3s ease;
-        }
-
-        .continue-btn:hover svg {
-            transform: translateX(5px);
-        }
-
-        /* ═══ RESPONSIVE ═══ */
-        @media (max-width: 900px) {
-            .theme-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .themes-hero {
-                padding: 40px 24px;
-            }
-
-            .themes-hero h1 {
-                font-size: 32px;
-            }
-
-            .comparison-table {
-                font-size: 12px;
-            }
-        }
-
-        @media (max-width: 600px) {
-            .theme-banner {
-                height: 200px;
-            }
-
-            .discord-logo-wrap {
-                width: 100px;
-                height: 100px;
-            }
-
-            .discord-logo-wrap svg {
-                width: 56px;
-                height: 56px;
-            }
-        }
-    </style>
 </head>
 
 <body>
@@ -879,24 +26,23 @@
     <!-- SIDEBAR -->
     <aside class="sidebar" id="sidebar">
         <div class="sidebar-header">
-            <a href="introduction.html" class="sidebar-logo">
-                <img src="images/meta.png" alt="Meta Logo">
+            <a href="../home.html" class="sidebar-logo">
+                <img src="../images/meta.png" alt="Meta Logo">
                 <span>Meta Docs</span>
             </a>
         </div>
         <nav class="sidebar-nav">
             <div class="nav-section">
                 <div class="nav-section-title">Getting Started</div>
-                <a href="introduction.html" class="nav-item" data-page="introduction.html"><svg
+                <a href="../home.html" class="nav-item" data-page="introduction.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z" />
                         <polyline points="9 22 9 12 15 12 15 22" />
                     </svg> Introduction</a>
-                <a href="documentation/getting.started.html" class="nav-item"
-                    data-page="documentation/getting-started.html"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                        height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
+                <a href="getting.started.html" class="nav-item" data-page="documentation/getting-started.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20" />
                     </svg> Getting Started</a>
                 <a href="https://discord.com/oauth2/authorize?client_id=980436688260182016&permissions=1392557026813&scope=bot%20applications.commands"
@@ -913,13 +59,13 @@
                         <path
                             d="M3 11h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5Zm0 0a9 9 0 1 1 18 0m0 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3Z" />
                     </svg> Support</a>
-                <a href="plus.html" class="nav-item nav-item-special" data-page="plus.html"><svg
+                <a href="../plus.html" class="nav-item nav-item-special" data-page="plus.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path
                             d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z" />
                     </svg> Meta Plus</a>
-                <a href="commands.html" class="nav-item" data-page="commands.html"><svg
+                <a href="../commands.html" class="nav-item" data-page="commands.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <polyline points="4 17 10 11 4 5" />
@@ -988,13 +134,13 @@
             </div>
             <div class="nav-section">
                 <div class="nav-section-title">Security</div>
-                <a href="inspecting.html" class="nav-item" data-page="inspecting.html"><svg
+                <a href="../article/inspecting.html" class="nav-item" data-page="inspecting.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <circle cx="11" cy="11" r="8" />
                         <path d="m21 21-4.3-4.3" />
                     </svg> Inspecting</a>
-                <a href="scanning.html" class="nav-item" data-page="scanning.html"><svg
+                <a href="../article/scanning.html" class="nav-item" data-page="scanning.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M3 7V5a2 2 0 0 1 2-2h2" />
@@ -1003,34 +149,52 @@
                         <path d="M7 21H5a2 2 0 0 1-2-2v-2" />
                         <path d="M7 12h10" />
                     </svg> Scanning</a>
-                <a href="dangerous-roles.html" class="nav-item" data-page="dangerous-roles.html"><svg
+                <a href="../article/dangerous-roles.html" class="nav-item" data-page="dangerous-roles.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z" />
                         <path d="M12 9v4" />
                         <path d="M12 17h.01" />
                     </svg> Dangerous Roles</a>
-                <div class="nav-section-title">Legal</div>
-                <a href="terms.html" class="nav-item" data-page="terms.html"><svg xmlns="http://www.w3.org/2000/svg"
-                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="16" x2="8" y1="13" y2="13" />
-                        <line x1="16" x2="8" y1="17" y2="17" />
-                        <polyline points="10 9 9 9 8 9" />
-                    </svg> Terms of Service</a>
-                <a href="privacy.html" class="nav-item" data-page="privacy.html"><svg xmlns="http://www.w3.org/2000/svg"
-                        width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
-                    </svg> Privacy Policy</a>
+                <a href="../article/meta-roles.html" class="nav-item" data-page="../article/meta-roles.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                        <circle cx="9" cy="7" r="4" />
+                        <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                    </svg> Meta Roles</a>
                 <a href="permissions.html" class="nav-item" data-page="permissions.html"><svg
                         xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
                         stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                         <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
                         <path d="m9 12 2 2 4-4" />
                     </svg> Permissions</a>
+                <a href="../article/how-to-ban.html" class="nav-item" data-page="how-to-ban.html">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 12l-8.5 8.5a2.1 2.1 0 1 1-3-3L11 9" />
+                        <path d="M15 3l6 6" />
+                        <path d="M8 10l7-7 6 6-7 7" />
+                    </svg>
+                    How to Ban
+                </a>
+
+                <div class="nav-section-title">Legal</div>
+                <a href="../legal/terms.html" class="nav-item" data-page="terms.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                        <polyline points="14 2 14 8 20 8" />
+                        <line x1="16" x2="8" y1="13" y2="13" />
+                        <line x1="16" x2="8" y1="17" y2="17" />
+                        <polyline points="10 9 9 9 8 9" />
+                    </svg> Terms of Service</a>
+                <a href="../legal/privacy.html" class="nav-item" data-page="privacy.html"><svg
+                        xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10" />
+                    </svg> Privacy Policy</a>
             </div>
         </nav>
     </aside>
@@ -1089,7 +253,7 @@
 
                 <!-- ═══ THEME CARDS ═══ -->
                 <h2>Available Themes</h2>
-                <p>Choose from 4 unique themes. Each applies a distinct color palette to Meta's embeds and messages.</p>
+                <p>Choose from 5 unique themes. Each applies a distinct color palette to Meta's embeds and messages.</p>
 
                 <div class="theme-grid">
 
@@ -1097,23 +261,24 @@
                     <div class="theme-card theme-classical">
                         <div class="theme-banner">
                             <img class="banner-img"
-                                src="https://media.discordapp.net/attachments/1011355084514394164/1382423913463550024/META_FALLEN_CITY.png?ex=6a2ba4d9&is=6a2a5359&hm=e0c61b713418316edbe2104243c3c9e5856f9b3ccab83452e8808303af53502d&=&format=webp&quality=lossless&width=2636&height=688"
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1382423913463550024/META_FALLEN_CITY.png?ex=6a53da99&is=6a528919&hm=6d9b0f9652ed6b5f05dab0772d9b792fd166b01fe2bb76b2d36da0766f877840&=&format=webp&quality=lossless&width=2636&height=688"
                                 alt="Meta Classical — Fallen City" loading="lazy">
                             <span class="banner-tagline">Signature Blue</span>
                             <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
-                                <h3 class="theme-name">Meta Classical</h3>
+                                <h3 class="theme-name">Royal Classic</h3>
                                 <span class="theme-tag tag-free">Free</span>
                             </div>
-                            <p class="theme-desc">The Classic theme delivers high-quality images paired with Meta's
+                            <p class="theme-desc">The Royal Classic theme delivers high-quality images paired with
+                                Meta's
                                 original signature colors. Timeless and stylish — this is the classic way to go.</p>
                             <div class="theme-colors">
-                                <div class="theme-color-swatch" style="background:#2727F5; color:#2727F5;"></div>
-                                <div class="theme-color-swatch" style="background:#1a1aaa; color:#1a1aaa;"></div>
-                                <div class="theme-color-swatch" style="background:#12124a; color:#12124a;"></div>
-                                <div class="theme-color-swatch" style="background:#08082e; color:#08082e;"></div>
+                                <div class="theme-color-swatch" style="background:#1414d5; color:#18188f;"></div>
+                                <div class="theme-color-swatch" style="background:#0031b8; color:#0e2e87;"></div>
+                                <div class="theme-color-swatch" style="background:#ba4700; color:#7c390f;"></div>
+                                <div class="theme-color-swatch" style="background:#03a700; color:#1e551d;"></div>
                             </div>
                         </div>
                     </div>
@@ -1144,7 +309,7 @@
                                 create a formal, clean, and professional logging experience. If you appreciate
                                 minimalism and clarity, the Discord theme is the perfect choice for your server.</p>
                             <div class="theme-colors">
-                                <div class="theme-color-swatch" style="background:#5865F2; color:#5865F2;"></div>
+                                <div class="theme-color-swatch" style="background:#4a4c4f; color:#4a4c4f;"></div>
                                 <div class="theme-color-swatch" style="background:#393a40; color:#393a40;"></div>
                                 <div class="theme-color-swatch" style="background:#2b2d31; color:#2b2d31;"></div>
                                 <div class="theme-color-swatch" style="background:#1e1f22; color:#1e1f22;"></div>
@@ -1165,8 +330,8 @@
                         </div>
                         <div class="theme-banner">
                             <img class="banner-img"
-                                src="https://media.discordapp.net/attachments/1011355084514394164/1382425812954775572/META_ARTIC.png?ex=6a2afdde&is=6a29ac5e&hm=a5c9fc58b2d87cab8809637d836dad87ce01f24994df847a8fe9abe1de0ce0e9&=&format=webp&quality=lossless&width=2636&height=686"
-                                alt="Meta Plus — Arctic" loading="lazy">
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1382425814142029855/META_COLOSSEUM.png?ex=6a53dc5e&is=6a528ade&hm=a46d77a9b047bd9fc8b135a51a35e18ad42c01fdfde25de9ac77a1fafc3c7ecd&=&format=webp&quality=lossless&width=2636&height=682"
+                                alt="Meta Plus — Colosseum" loading="lazy">
                             <span class="banner-tagline">Curated · Cinematic</span>
                             <div class="banner-glow-bar"></div>
                         </div>
@@ -1181,10 +346,10 @@
                                 blue aesthetic of Meta. Elevate your space. Enhance your style. Experience Meta Plus.
                             </p>
                             <div class="theme-colors">
-                                <div class="theme-color-swatch" style="background:#2dd4bf; color:#2dd4bf;"></div>
-                                <div class="theme-color-swatch" style="background:#2556a0; color:#2556a0;"></div>
-                                <div class="theme-color-swatch" style="background:#4ade80; color:#4ade80;"></div>
-                                <div class="theme-color-swatch" style="background:#1a3a6a; color:#1a3a6a;"></div>
+                                <div class="theme-color-swatch" style="background:#1770ff; color:#1770ff;"></div>
+                                <div class="theme-color-swatch" style="background:#0300b9; color:#0300b9;"></div>
+                                <div class="theme-color-swatch" style="background:#00dd3b; color:#00dd3b;"></div>
+                                <div class="theme-color-swatch" style="background:#ff6f1b; color:#ff6f1b;"></div>
                             </div>
                         </div>
                     </div>
@@ -1202,14 +367,14 @@
                         </div>
                         <div class="theme-banner">
                             <img class="banner-img"
-                                src="https://media.discordapp.net/attachments/1011355084514394164/1382428608655524030/META_DINOWORLD.png?ex=6a2b0078&is=6a29aef8&hm=0a70771782dded43f110dd2b755da55975c566a401815aa1309311661033714b&=&format=webp&quality=lossless&width=2636&height=686"
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1382428608655524030/META_DINOWORLD.png?ex=6a53def8&is=6a528d78&hm=e394bf0d6e7c9db7113a04883f9f6ed0363e863b78d867edadec45765fc920c4&=&format=webp&quality=lossless&width=2636&height=686"
                                 alt="Nature — Dino World" loading="lazy">
                             <span class="banner-tagline">Wild · Serene</span>
                             <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
-                                <h3 class="theme-name">Nature</h3>
+                                <h3 class="theme-name">Immersed in Nature</h3>
                                 <span class="theme-tag tag-premium">✨ Premium</span>
                             </div>
                             <p class="theme-desc">Enjoy the calming greenery and the peaceful essence of the outdoors,
@@ -1219,17 +384,16 @@
                                 serene and uplifting atmosphere. Take a deep breath, sit back, and let the tranquility
                                 of nature surround you.</p>
                             <div class="theme-colors">
-                                <div class="theme-color-swatch" style="background:#4ade80; color:#4ade80;"></div>
-                                <div class="theme-color-swatch" style="background:#22c55e; color:#22c55e;"></div>
-                                <div class="theme-color-swatch" style="background:#2dd4bf; color:#2dd4bf;"></div>
-                                <div class="theme-color-swatch" style="background:#0a1a0a; color:#0a1a0a;"></div>
+                                <div class="theme-color-swatch" style="background:#00501d; color:#00501d;"></div>
+                                <div class="theme-color-swatch" style="background:#00ae40; color:#00ae40;"></div>
+                                <div class="theme-color-swatch" style="background:#05ff69; color:#05ff69;"></div>
+                                <div class="theme-color-swatch" style="background:#98fb98; color:#98fb98;"></div>
                             </div>
                         </div>
                     </div>
 
                     <!-- Wonderful Space Theme (Premium) -->
                     <div class="theme-card theme-space premium-theme" style="pointer-events:auto;">
-                        <div class="coming-soon-overlay"><span class="coming-soon-label">Coming Soon</span></div>
                         <div class="premium-badge">
                             <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24"
                                 fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -1241,14 +405,14 @@
                         </div>
                         <div class="theme-banner">
                             <img class="banner-img"
-                                src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&w=2636&q=80"
-                                alt="Wonderful Space — Cosmos (placeholder)" loading="lazy">
+                                src="https://media.discordapp.net/attachments/1011355084514394164/1524838615153115316/META_ARISEN_EARTH.png?ex=6a53d71f&is=6a52859f&hm=b3f718b69a74c35b39ee040c1e9059af21d6c10a44d2ad45a943d4cb5b97d594&=&format=webp&quality=lossless&width=2636&height=692"
+                                alt="Wonderful Space — Arisen Earth" loading="lazy">
                             <span class="banner-tagline">Cosmic · Otherworldly</span>
                             <div class="banner-glow-bar"></div>
                         </div>
                         <div class="theme-info">
                             <div class="theme-info-header">
-                                <h3 class="theme-name">Wonderful Space</h3>
+                                <h3 class="theme-name">Lost in the Deep Space</h3>
                                 <span class="theme-tag tag-premium">✨ Premium</span>
                             </div>
                             <p class="theme-desc">Drift through the cosmos. Wonderful Space wraps your server in the
@@ -1257,9 +421,9 @@
                                 between galaxies — this theme turns every log and embed into a window to the universe.
                                 Bold. Dark. Otherworldly.</p>
                             <div class="theme-colors">
-                                <div class="theme-color-swatch" style="background:#f59e0b; color:#f59e0b;"></div>
-                                <div class="theme-color-swatch" style="background:#6366f1; color:#6366f1;"></div>
-                                <div class="theme-color-swatch" style="background:#14b8a6; color:#14b8a6;"></div>
+                                <div class="theme-color-swatch" style="background:#030042; color:#030042;"></div>
+                                <div class="theme-color-swatch" style="background:#27004e; color:#27004e;"></div>
+                                <div class="theme-color-swatch" style="background:#002901; color:#002901;"></div>
                                 <div class="theme-color-swatch"
                                     style="background:#000000; color:#000000; border-color: rgba(255,255,255,0.15);">
                                 </div>
@@ -1288,21 +452,21 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td><span class="table-swatch" style="background:#2727F5;"></span>Meta Classical</td>
+                                <td><span class="table-swatch" style="background:#2727F5;"></span>Royal Classic</td>
                                 <td>Dark Blue</td>
                                 <td>Timeless & Stylish</td>
                                 <td><span class="table-check">✓ Free</span></td>
                             </tr>
                             <tr>
-                                <td><span class="table-swatch" style="background:#5865F2;"></span>Essence of Discord
+                                <td><span class="table-swatch" style="background:#2b2d31;"></span>Essence of Discord
                                 </td>
-                                <td>Discord Grey / Blurple</td>
+                                <td>Discord Grey</td>
                                 <td>Minimal & Professional</td>
                                 <td><span class="table-check">✓ Free</span></td>
                             </tr>
                             <tr>
-                                <td><span class="table-swatch" style="background:#00FFEB;"></span>Meta Plus</td>
-                                <td>Aqua / Neon Lime</td>
+                                <td><span class="table-swatch" style="background:#0091ff;"></span>Meta Plus</td>
+                                <td>Electric Blue / Neon</td>
                                 <td>Exclusive & Glowing</td>
                                 <td><span class="table-premium-label"><svg xmlns="http://www.w3.org/2000/svg" width="11"
                                             height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1312,7 +476,8 @@
                                         </svg> Meta Plus</span></td>
                             </tr>
                             <tr>
-                                <td><span class="table-swatch" style="background:#4ade80;"></span>Nature</td>
+                                <td><span class="table-swatch" style="background:#04ff60;"></span>Immersed in Nature
+                                </td>
                                 <td>Green / Sea Green</td>
                                 <td>Serene & Organic</td>
                                 <td><span class="table-premium-label"><svg xmlns="http://www.w3.org/2000/svg" width="11"
@@ -1323,8 +488,8 @@
                                         </svg> Meta Plus</span></td>
                             </tr>
                             <tr>
-                                <td><span class="table-swatch" style="background:#f59e0b;"></span>Wonderful Space</td>
-                                <td>Black / Amber / Indigo</td>
+                                <td><span class="table-swatch" style="background:#490077;"></span>Wonderful Space</td>
+                                <td>Black / Purple</td>
                                 <td>Cosmic & Bold</td>
                                 <td><span class="table-premium-label"><svg xmlns="http://www.w3.org/2000/svg" width="11"
                                             height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -1370,7 +535,8 @@
                         </div>
                         <div class="theme-step">
                             <div class="theme-step-num">2</div>
-                            <div class="theme-step-text">Navigate to the <strong>Themes</strong> section in the settings
+                            <div class="theme-step-text">Navigate to the <strong>Appearance</strong> section in the
+                                settings
                                 menu.</div>
                         </div>
                         <div class="theme-step">
